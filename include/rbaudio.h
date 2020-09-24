@@ -16,7 +16,7 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 #ifndef _RBAUDIO_H
 #define _RBAUDIO_H
 
-#if defined (__APPLE__) && defined (__MACH__)
+#if defined (__APPLE__) && defined (__MACH__) && defined (USE_MAC_FRAMEWORKS)
 # include <SDL/SDL.h>
 #else
 # include <SDL.h>

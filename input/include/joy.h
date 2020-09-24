@@ -16,7 +16,7 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 
 #include "pstypes.h"
 #include "fix.h"
-#if defined (__APPLE__) && defined (__MACH__)
+#if defined (__APPLE__) && defined (__MACH__) && defined (USE_MAC_FRAMEWORKS)
 #	include "SDL/SDL_joystick.h"
 #else
 #	include "SDL_joystick.h"

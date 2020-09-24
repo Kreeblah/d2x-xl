@@ -14,13 +14,15 @@
 #include <sys/types.h>
 #endif
 
-#if defined (__APPLE__) && defined (__MACH__)
+#if defined (__APPLE__) && defined (__MACH__) && defined (USE_MAC_FRAMEWORKS)
 #	include "SDL/SDL_main.h"
 #	include "SDL/SDL_keyboard.h"
-#	include "FolderDetector.h"
 #else
 #	include "SDL_main.h"
 #	include "SDL_keyboard.h"
+#endif
+#if defined (__APPLE__) && defined (__MACH__)
+#	include "FolderDetector.h"
 #endif
 #include "descent.h"
 #include "findfile.h"

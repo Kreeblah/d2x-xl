@@ -73,7 +73,7 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 #include "soundthreads.h"
 #include "sparkeffect.h"
 #include "createmesh.h"
-#if defined (__APPLE__) && defined (__MACH__)
+#if defined (__APPLE__) && defined (__MACH__) && defined (USE_MAC_FRAMEWORKS)
 #include "SDL/SDL_syswm.h"
 #else
 #include "SDL_syswm.h"

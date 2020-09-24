@@ -11,7 +11,7 @@
 
 #include <string.h>
 
-#if defined (__APPLE__) && defined (__MACH__)
+#if defined (__APPLE__) && defined (__MACH__) && defined (USE_MAC_FRAMEWORKS)
 # include <SDL/SDL.h>
 #else
 # include <SDL.h>

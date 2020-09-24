@@ -1,3 +1,5 @@
+#define USE_MAC_FRAMEWORKS 1
+
 /* Set to 1 to use SDL Mixer */
 #define USE_SDL_MIXER 1
 

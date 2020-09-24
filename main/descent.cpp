@@ -31,11 +31,10 @@ char copyright[] = "DESCENT II  COPYRIGHT (C) 1994-1996 PARALLAX SOFTWARE CORPOR
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#if defined (__APPLE__) && defined (__MACH__)
+#if defined (__APPLE__) && defined (__MACH__) && defined (USE_MAC_FRAMEWORKS)
 #	include "SDL/SDL_main.h"
 #	include "SDL/SDL_keyboard.h"
 #	include "SDL_net/SDL_net.h"
-#	include "FolderDetector.h"
 #else
 #	ifdef _WIN32
 #		include <WinSock.h>
@@ -43,6 +42,9 @@ char copyright[] = "DESCENT II  COPYRIGHT (C) 1994-1996 PARALLAX SOFTWARE CORPOR
 #	include "SDL_main.h"
 #	include "SDL_keyboard.h"
 #	include "SDL_net.h"
+#endif
+#if defined (__APPLE__) && defined (__MACH__)
+#	include "FolderDetector.h"
 #endif
 #include "descent.h"
 #include "u_mem.h"

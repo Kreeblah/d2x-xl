@@ -18,11 +18,14 @@
 #include <math.h>
 #include <fcntl.h>
 #include <stdio.h>
-#if defined (__APPLE__) && defined (__MACH__)
+#if defined (__APPLE__) && defined (__MACH__) && defined (USE_MAC_FRAMEWORKS)
 # include <stdlib.h>
 # include <SDL/SDL.h>
 #else
 # include <SDL.h>
+#endif
+#if defined (__APPLE__) && defined (__MACH__)
+# include <stdlib.h>
 #endif
 
 #include "ogl_defs.h"

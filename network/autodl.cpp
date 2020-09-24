@@ -8,7 +8,7 @@
 #include <time.h>
 #include <string.h>
 
-#if defined (__APPLE__) && defined (__MACH__)
+#if defined (__APPLE__) && defined (__MACH__) && defined (USE_MAC_FRAMEWORKS)
 #	include <SDL/SDL.h>
 #	include <SDL/SDL_thread.h>
 #	include <SDL_net/SDL_net.h>

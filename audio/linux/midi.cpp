@@ -15,7 +15,7 @@
 #include "hmpfile.h"
 
 #if USE_SDL_MIXER
-#	if defined (__APPLE__) && defined (__MACH__)
+#	if defined (__APPLE__) && defined (__MACH__) && defined (USE_MAC_FRAMEWORKS)
 #		include <SDL/SDL_mixer.h>
 #	else
 #		include <SDL_mixer.h>

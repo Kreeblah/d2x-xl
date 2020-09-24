@@ -18,11 +18,13 @@
 #include <math.h>
 #include <fcntl.h>
 #include <stdio.h>
-#if defined (__APPLE__) && defined (__MACH__)
-# include <stdlib.h>
+#if defined (__APPLE__) && defined (__MACH__) && defined (USE_MAC_FRAMEWORKS)
 # include <SDL/SDL.h>
 #else
 # include <SDL.h>
+#endif
+#if defined (__APPLE__) && defined (__MACH__)
+# include <stdlib.h>
 #endif
 
 #include "descent.h"
