@@ -109,7 +109,7 @@ char copyright[] = "DESCENT II  COPYRIGHT (C) 1994-1996 PARALLAX SOFTWARE CORPOR
 extern const char *pszOglExtensions;
 extern int32_t glHWHash;
 
-#if defined (__APPLE__) && defined (__MACH__)
+#if defined (__APPLE__) && defined (__MACH__) && defined (USE_MAC_FRAMEWORKS)
 #	include <SDL/SDL.h>
 #	if USE_SDL_MIXER
 #		include <SDL_mixer/SDL_mixer.h>

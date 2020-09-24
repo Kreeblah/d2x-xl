@@ -30,7 +30,7 @@
 #include "config.h"
 #include "text.h"
 
-#if defined (__APPLE__) && defined (__MACH__)
+#if defined (__APPLE__) && defined (__MACH__) && defined (USE_MAC_FRAMEWORKS)
 #	include <SDL/SDL.h>
 #	if USE_SDL_MIXER
 #		include <SDL_mixer/SDL_mixer.h>
