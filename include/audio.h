@@ -29,7 +29,7 @@
 #	endif
 #endif
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 # include <SDL/SDL.h>
 # include <SDL_mixer/SDL_mixer.h>
 #else

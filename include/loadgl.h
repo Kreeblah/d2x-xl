@@ -1171,7 +1171,7 @@ void *dll_GetSymbol(void *dllhandle,const char *symname)
 	return (void *)GetProcAddress((HINSTANCE)dllhandle,symname);
 }
 #endif
-#if defined(__unix__) || defiend(__macosx__)
+#if defined(__unix__) || (defined (__APPLE__) && defined (__MACH__))
 #include <dlfcn.h>
 void *dll_LoadModule(const char *name)
 {

@@ -23,7 +23,7 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 #include <errno.h>
 #endif
 #include <ctype.h>      /* for isdigit */
-#if defined (__unix__) || defined (__macosx__)
+#if defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))
 #include <sys/stat.h>
 #include <sys/types.h>
 #endif

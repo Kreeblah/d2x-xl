@@ -8,13 +8,13 @@
 #include <string.h>
 #include <signal.h>
 
-#if defined(__unix__) || defined(__macosx__)
+#if defined(__unix__) || (defined (__APPLE__) && defined (__MACH__))
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #endif
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 #	include "SDL/SDL_main.h"
 #	include "SDL/SDL_keyboard.h"
 #	include "FolderDetector.h"

@@ -18,7 +18,7 @@
 #include <math.h>
 #include <fcntl.h>
 #include <stdio.h>
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 # include <stdlib.h>
 # include <SDL/SDL.h>
 #else
@@ -1201,7 +1201,7 @@ if ((bLocal = (m_info.pTexture == NULL))) {
 	}
 #if TEXTURE_COMPRESSION
 m_info.pTexture->Prepare (m_info.compressed.bCompressed);
-#	ifndef __macosx__
+#	if !defined (__APPLE__) || !defined (__MACH__)
 if (!(m_info.compressed.bCompressed || Parent ())) {
 	if (ogl.m_features.bTextureCompression &&
 		 ((m_info.pTexture->Format () == GL_RGBA) || (m_info.pTexture->Format () == GL_RGB)) &&

@@ -15,7 +15,7 @@
 #	define OGL_MULTI_TEXTURING	1
 #	define VERTEX_LIGHTING		1
 #	define OGL_QUERY				1
-#elif defined(__macosx__)
+#elif defined (__APPLE__) && defined (__MACH__)
 #	define OGL_MULTI_TEXTURING	1
 #	define VERTEX_LIGHTING		1
 #	define OGL_QUERY				1
@@ -49,7 +49,7 @@ void OglSetFOV (double fov);
 #	include "loadgl.h"
 int OglInitLoadLibrary (void);
 #else
-#	ifdef __macosx__
+#	if defined (__APPLE__) && defined (__MACH__)
 #		include <OpenGL/gl.h>
 #		include <OpenGL/glu.h>
 #		include <OpenGL/glext.h>
@@ -243,7 +243,7 @@ extern PFNGLUNIFORM4FVARBPROC					glUniform4fv;
 extern PFNGLUNIFORM3FVARBPROC					glUniform3fv;
 extern PFNGLUNIFORM1FVARBPROC					glUniform1fv;
 #else
-#  ifdef __macosx__
+#  if defined (__APPLE__) && defined (__MACH__)
 #    define glCreateShaderObject   glCreateShaderObjectARB
 #    define glShaderSource         glShaderSourceARB
 #    define glCompileShader        glCompileShaderARB

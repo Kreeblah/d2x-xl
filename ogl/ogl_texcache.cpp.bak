@@ -18,7 +18,7 @@
 #include <math.h>
 #include <fcntl.h>
 #include <stdio.h>
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 # include <stdlib.h>
 # include <SDL/SDL.h>
 #else

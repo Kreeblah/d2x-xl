@@ -30,7 +30,7 @@
 #if !USE_OPENMP
 
 #if !USE_OPENMP
-#	ifdef __macosx__  // BEGIN itaylo 06 NOV 2013
+#	if defined (__APPLE__) && defined (__MACH__)  // BEGIN itaylo 06 NOV 2013
 #		include "SDL/SDL_mutex.h"
 #	else
 #		include "SDL_mutex.h"

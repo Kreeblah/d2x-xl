@@ -495,7 +495,7 @@ return nSounds > 0;
 
 #if USE_SDL_MIXER
 
-#	ifdef __macosx__
+#   if defined (__APPLE__) && defined (__MACH__)
 #		include <SDL_mixer/SDL_mixer.h>
 #	else
 #		include <SDL_mixer.h>

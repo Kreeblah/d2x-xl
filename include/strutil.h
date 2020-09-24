@@ -14,7 +14,7 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 #ifndef _STRUTILS_H
 #define _STRUTILS_H
 
-#if defined(__unix__) || defined(__macosx__)
+#if defined(__unix__) || (defined (__APPLE__) && defined (__MACH__))
 #	include <string.h>
 #	define stricmp(a,b) strcasecmp(a,b)
 #	define strnicmp(a,b,c) strncasecmp(a,b,c)

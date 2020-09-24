@@ -197,7 +197,7 @@ typedef struct tGameFolders {
 	tStaticFolders		game;
 	tSharedFolders		var;
 	tPrivateFolders	user;
-#if defined (__unix__) || defined (__macosx__)
+#if defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))
 	char szSharePath [FILENAME_LEN];
 #endif
 	int32_t bAltHogDirInited;

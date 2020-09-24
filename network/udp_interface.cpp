@@ -88,7 +88,7 @@ if	 ((gameStates.multi.nGameType == UDP_GAME) &&
 #	include <sys/ioctl.h>
 #	include <sys/socket.h>
 #	include <net/if.h>
-#	ifdef __macosx__
+#	if defined (__APPLE__) && defined (__MACH__)
 #		include <ifaddrs.h>
 #		include <netdb.h>
 #	endif
@@ -139,7 +139,7 @@ if	 ((gameStates.multi.nGameType == UDP_GAME) &&
 /* We require the interface to be UP and RUNNING to accept it.
  */
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 #define IF_REQFLAGS (IFF_UP | IFF_RUNNING | IFF_BROADCAST)
 #else
 #define IF_REQFLAGS (IFF_UP | IFF_RUNNING)
@@ -427,7 +427,7 @@ m_nMasks = j;
 return m_nBroads;
 }
 
-#elif defined(__macosx__) //----------------------------------------------------
+#elif defined (__APPLE__) && defined (__MACH__) //------------------------------
 
 int32_t CClientManager::BuildInterfaceList (void)
 {
@@ -560,7 +560,7 @@ m_nBroads = d;
 //------------------------------------------------------------------------------
 // Parse PORTSHIFT numeric parameter
 
-//#ifndef __macosx__
+//#ifndef __APPLE__ && __MACH__
 
 static void PortShift (const char *pszPort)
 {
@@ -578,7 +578,7 @@ memcpy (qhbuf + 4, &srcPort, 2);
 //------------------------------------------------------------------------------
 // Do hostname resolve on name "buf" and return the address in buffer "qhbuf".
 
-#if 1//def __macosx__
+#if 1//def __APPLE__ && __MACH__
 
 static void SetupHints (struct addrinfo *hints)
 {

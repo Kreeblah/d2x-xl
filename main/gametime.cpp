@@ -21,7 +21,7 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 #include <stdarg.h>
 #include <ctype.h>
 #include <time.h>
-#if defined(__unix__) || defined(__macosx__)
+#if defined(__unix__) || (defined (__APPLE__) && defined (__MACH__))
 #	include <sys/time.h>
 #endif
 
@@ -154,7 +154,7 @@ CFrameTime<LARGE_INTEGER>::Compute ();
 
 //------------------------------------------------------------------------------
 
-#elif defined (__unix__) || defined(__macosx__)
+#elif defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))
 
 class CUnixFrameTime : public CFrameTime <int64_t> {
 	protected:
@@ -263,7 +263,7 @@ class CFrameTimeFactory {
 			if (!m_timer)
 #ifdef _WIN32
 				m_timer = new CWindowsFrameTime ();
-#elif defined (__unix__) || defined(__macosx__)
+#elif defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))
 				m_timer = new CUnixFrameTime ();
 #else
 				m_timer = new CSDLFrameTime ();

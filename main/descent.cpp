@@ -23,7 +23,7 @@ char copyright[] = "DESCENT II  COPYRIGHT (C) 1994-1996 PARALLAX SOFTWARE CORPOR
 #include <string.h>
 #include <signal.h>
 
-#if defined(__unix__) || defined(__macosx__)
+#if defined(__unix__) || (defined (__APPLE__) && defined (__MACH__))
 #include <unistd.h>
 #include <sys/stat.h>
 #endif
@@ -31,7 +31,7 @@ char copyright[] = "DESCENT II  COPYRIGHT (C) 1994-1996 PARALLAX SOFTWARE CORPOR
 #include <sys/types.h>
 #include <sys/stat.h>
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 #	include "SDL/SDL_main.h"
 #	include "SDL/SDL_keyboard.h"
 #	include "SDL_net/SDL_net.h"
@@ -97,7 +97,7 @@ char copyright[] = "DESCENT II  COPYRIGHT (C) 1994-1996 PARALLAX SOFTWARE CORPOR
 #include "IpToCountry.h"
 
 #ifndef DESCENT_EXECUTABLE_VERSION
-#	ifdef __macosx__
+#	if defined (__APPLE__) && defined (__MACH__)
 #		define	DESCENT_EXECUTABLE_VERSION "OS X"
 #	else
 #		define	DESCENT_EXECUTABLE_VERSION "Linux"
@@ -107,7 +107,7 @@ char copyright[] = "DESCENT II  COPYRIGHT (C) 1994-1996 PARALLAX SOFTWARE CORPOR
 extern const char *pszOglExtensions;
 extern int32_t glHWHash;
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 #	include <SDL/SDL.h>
 #	if USE_SDL_MIXER
 #		include <SDL_mixer/SDL_mixer.h>
@@ -150,7 +150,7 @@ uint32_t descent_critical_errcode = 0;
 
 // ----------------------------------------------------------------------------
 
-#if defined (__unix__) || defined (__macosx__)
+#if defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))
 void D2SignalHandler (int32_t nSignal)
 #else
 void __cdecl D2SignalHandler (int32_t nSignal)
@@ -416,7 +416,7 @@ void PrintBanner (void)
 {
 #if (defined (_WIN32) || defined (__unix__))
 console.printf (CON_NORMAL, "\nDESCENT 2 %s v%d.%d.%d\n", VERSION_TYPE, D2X_MAJOR, D2X_MINOR, D2X_MICRO);
-#elif defined(__macosx__)
+#if defined (__APPLE__) && defined (__MACH__)
 console.printf (CON_NORMAL, "\nDESCENT 2 %s -- %s\n", VERSION_TYPE, DESCENT_VERSION);
 #endif
 if (hogFileManager.D2XFiles ().bInitialized)

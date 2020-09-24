@@ -8,13 +8,13 @@
 #include <string.h>
 #include <signal.h>
 
-#if defined(__unix__) || defined(__macosx__)
+#if defined(__unix__) || (defined (__APPLE__) && defined (__MACH__))
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #endif
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 #	include "SDL/SDL_main.h"
 #	include "SDL/SDL_keyboard.h"
 #	include "FolderDetector.h"
@@ -27,7 +27,7 @@
 #include "args.h"
 #include "text.h"
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 #	include <SDL/SDL.h>
 #	if USE_SDL_MIXER
 #		include <SDL_mixer/SDL_mixer.h>
@@ -51,7 +51,7 @@
 #		define	DEFAULT_GAME_FOLDER		""
 #	endif
 #	define	D2X_APPNAME					"d2x-xl.exe"
-#elif defined(__macosx__)
+#elif defined (__APPLE__) && defined (__MACH__)
 #	define	DEFAULT_GAME_FOLDER		"/Applications/Games/D2X-XL"
 #	define	D2X_APPNAME					"d2x-xl"
 #else
@@ -63,7 +63,7 @@
 #	define SHAREPATH						""
 #endif
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 
 #	define	DATA_FOLDER					"Data"
 #	define	SHADER_FOLDER				"Shaders"
@@ -312,7 +312,7 @@ nSharedFolderMode = !*CheckFolder (gameFolders.var.szRoot, appConfig.Text ("-cac
 if (nSharedFolderMode && !*CheckFolder (gameFolders.var.szRoot, SHARED_ROOT_FOLDER, ""))
 	*gameFolders.var.szRoot = '\0';
 
-#	else //__macosx__
+#	else //__APPLE__ && __MACH__
 
 if (!FindDataFolder (appConfig.Text ("-datadir")) &&
 	 !FindDataFolder (appConfig [1], true) &&
@@ -330,7 +330,7 @@ nSharedFolderMode = !*CheckFolder (gameFolders.var.szRoot, appConfig.Text ("-cac
 if (nSharedFolderMode)
 	*gameFolders.var.szRoot = '\0';
 
-#endif // __macosx__
+#endif // __APPLE__ && __MACH__
 
 PrintLog (-1);
 return 1;
@@ -342,7 +342,7 @@ static int32_t MakeCacheFolders (int32_t nSharedFolderMode, int32_t nUserFolderM
 {
 PrintLog (1, "\nCreating cache folders\n");
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 
 if (*gameFolders.user.szRoot)
 	strcpy (gameFolders.user.szCache, gameFolders.user.szRoot);
@@ -392,7 +392,7 @@ else if ((nSharedFolderMode > 0) && !MakeFolder (gameFolders.var.szCache, gameFo
 	strcpy (gameFolders.var.szCache, gameFolders.user.szCache);
 	}
 
-#endif // __macosx__
+#endif // __APPLE__ && __MACH__
 
 PrintLog (-1);
 return 1;

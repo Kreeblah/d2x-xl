@@ -26,7 +26,7 @@
 #	include <stddef.h>
 #endif
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 #	include "glew.h"
 #	include <OpenGL/gl.h>
 #	include <OpenGL/glu.h>

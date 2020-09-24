@@ -72,7 +72,7 @@ char *pszPauseMsg = NULL;
 //------------------------------------------------------------------------------
 //#define TEST_TIMER    1		//if this is set, do checking on timer
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 # include <SDL/SDL.h>
 #else
 # include <SDL.h>

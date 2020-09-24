@@ -10,7 +10,7 @@
 #endif
 
 #include <string.h>   // for memset
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 # include <SDL/SDL.h>
 #else
 # include <SDL.h>

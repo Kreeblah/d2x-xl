@@ -23,13 +23,13 @@ char copyright[] = "DESCENT II  COPYRIGHT (C) 1994-1996 PARALLAX SOFTWARE CORPOR
 #include <string.h>
 #include <signal.h>
 
-#if defined(__unix__) || defined(__macosx__)
+#if defined(__unix__) || (defined (__APPLE__) && defined (__MACH__))
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #endif
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 #	include "SDL/SDL_main.h"
 #	include "SDL/SDL_keyboard.h"
 #	include "FolderDetector.h"
@@ -89,7 +89,7 @@ char copyright[] = "DESCENT II  COPYRIGHT (C) 1994-1996 PARALLAX SOFTWARE CORPOR
 
 extern int SDL_HandleSpecialKeys;
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 #	include <SDL/SDL.h>
 #	if USE_SDL_MIXER
 #		include <SDL/SDL_mixer.h>
@@ -132,7 +132,7 @@ unsigned descent_critical_errcode = 0;
 
 // ----------------------------------------------------------------------------
 
-#if defined (__unix__) || defined (__macosx__)
+#if defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))
 void D2SignalHandler (int nSignal)
 #else
 void __cdecl D2SignalHandler (int nSignal)
@@ -325,7 +325,7 @@ void PrintBanner (void)
 {
 #if (defined (_WIN32) || defined (__unix__))
 console.printf(CON_NORMAL, "\nDESCENT 2 %s v%d.%d.%d\n", VERSION_TYPE, D2X_MAJOR, D2X_MINOR, D2X_MICRO);
-#elif defined(__macosx__)
+#elif defined (__APPLE__) && defined (__MACH__)
 console.printf(CON_NORMAL, "\nDESCENT 2 %s -- %s\n", VERSION_TYPE, DESCENT_VERSION);
 #endif
 if (hogFileManager.D2XFiles ().bInitialized)

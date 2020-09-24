@@ -25,7 +25,7 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 # include <sys/malloc.h>
 #else
 # include <malloc.h>
@@ -215,7 +215,7 @@ if (!buffer)
 if (UnregisterMemBlock (buffer) < 0)
 	return;
 buffer = reinterpret_cast<void*> (reinterpret_cast<int*> (buffer) - 1);
-#ifndef __macosx__
+#if ! defined (__APPLE__) || ! defined (__MACH__)
 nBytesMalloced -= *reinterpret_cast<int*> (buffer);
 #endif
 MemCheckIntegrity (buffer);

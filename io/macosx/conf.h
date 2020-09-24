@@ -1,5 +1,3 @@
-#define __macosx__
-
 /* Set to 1 to use SDL Mixer */
 #define USE_SDL_MIXER 1
 

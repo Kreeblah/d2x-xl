@@ -102,7 +102,7 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 #include "console.h"
 #include "vecmat.h"
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 # include <SDL/SDL.h>
 # include <SDL/SDL_thread.h>
 #else

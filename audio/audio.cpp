@@ -895,7 +895,7 @@ if (!(gameStates.sound.bDynamic && m_info.bAvailable))
 	RETURN;
 m_info.bInitialized =
 m_info.bAvailable = 0;
-#if defined (__MINGW32__) || defined (__macosx__)
+#if defined (__MINGW32__) || (defined (__APPLE__) && defined (__MACH__))
 SDL_Delay (500); // CloseAudio hangs if it's called too soon after opening?
 #endif
 #if USE_OPENAL

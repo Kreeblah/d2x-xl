@@ -39,7 +39,7 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 #  define PATH_MAX _MAX_PATH
 # endif
 # define FNAME_MAX 256
-#elif defined(__unix__) || defined(__macosx__)
+#elif defined(__unix__) || (defined (__APPLE__) && defined (__MACH__))
 # include <sys/types.h>
 # ifndef PATH_MAX
 #  define PATH_MAX 1024
@@ -47,7 +47,7 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 # define FNAME_MAX 256
 #endif
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 #	define uint16_t uint16_t
 #endif
 

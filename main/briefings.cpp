@@ -49,7 +49,7 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 #include "menubackground.h"
 #include "cockpit.h"
 #include "config.h"
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 # include <OpenGL/glu.h>
 # undef GL_ARB_multitexture // hack!
 #else

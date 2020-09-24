@@ -21,13 +21,13 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 #include <string.h>
 #include <signal.h>
 
-#if defined(__unix__) || defined(__macosx__)
+#if defined(__unix__) || (defined (__APPLE__) && defined (__MACH__))
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #endif
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 #	include "SDL/SDL_main.h"
 #	include "SDL/SDL_keyboard.h"
 #	include "FolderDetector.h"
@@ -198,7 +198,7 @@ void EvalSoundArgs (void)
 	int32_t	t;
 
 #if USE_SDL_MIXER
-#	ifdef __macosx__
+#	if defined (__APPLE__) && defined (__MACH__)
 void * volatile function_p = (void *)&(Mix_OpenAudio);
 if (function_p == NULL) {
 
@@ -209,7 +209,7 @@ if (function_p == NULL) {
 	gameOptions [0].sound.bUseSDLMixer = 0;
 	}
 else
-#	endif //__macosx__
+#	endif //__APPLE__ && __MACH__
 if ((t = FindArg ("-sdl_mixer")))
 	gameOptions [0].sound.bUseSDLMixer = NumArg (t, 1);
 #endif //USE_SDL_MIXER

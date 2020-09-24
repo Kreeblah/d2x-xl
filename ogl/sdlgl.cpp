@@ -9,7 +9,7 @@
 #include <conf.h>
 #endif
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 # include <SDL/SDL.h>
 # ifdef SDL_IMAGE
 #  include <SDL/SDL_image.h>

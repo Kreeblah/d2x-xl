@@ -44,7 +44,7 @@ int FileFindFirst (const char *pszFilter, FILEFINDSTRUCT *ffsP, int nFlags)
 {
 	char szFilter [FILENAME_LEN];
 	int	i, j;
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
   const int flags = REG_EXTENDED | REG_NOSUB | REG_ICASE;
 #else
   const int flags = REG_EXTENDED | REG_NOSUB;

@@ -24,7 +24,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 # include <SDL/SDL.h>
 #else
 # include <SDL.h>

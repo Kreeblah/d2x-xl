@@ -29,7 +29,7 @@ COPYRIGHT 1993-1998 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 #include "text.h"
 #include "cfile.h"
 #include "u_mem.h"
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 #	include "MacErrorMsg.h"
 #endif
 
@@ -411,7 +411,7 @@ else
 	else
 #	endif
 	PrintLog (0, "D2X-XL: %s\n", pszMsg);
-#elif defined (__macosx__)
+#elif defined (__APPLE__) && defined (__MACH__)
 	NativeMacOSXMessageBox (pszMsg);
 #endif
 gameData.appData.bGamePaused = 0;

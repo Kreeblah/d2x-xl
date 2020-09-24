@@ -34,7 +34,7 @@
 #  include <wglew.h>
 #else
 #	include "glew.h"
-#	if !defined(__APPLE__) || defined(GLEW_APPLE_GLX)
+#	if (! defined(__APPLE__) || ! defined(__MACH__)) || defined(GLEW_APPLE_GLX)
 #		include <GL/glxew.h>
 #	endif
 #endif
@@ -68,7 +68,7 @@
 #  define GLXEW_CONTEXT_ARG_DEF_LIST void
 #endif /* GLEW_MX */
 
-#if defined(__APPLE__)
+#if defined(__APPLE__) && defined(__MACH__)
 #include <stdlib.h>
 #include <string.h>
 #include <AvailabilityMacros.h>
@@ -111,7 +111,7 @@ void* NSGLGetProcAddress (const GLubyte *name)
   return symbol ? NSAddressOfSymbol(symbol) : NULL;
 }
 #endif /* MAC_OS_X_VERSION_10_3 */
-#endif /* __APPLE__ */
+#endif /* __APPLE__ && __MACH__ */
 
 #if defined(__sgi) || defined (__sun)
 #include <dlfcn.h>
@@ -142,7 +142,7 @@ void* dlGetProcAddress (const GLubyte* name)
 #if defined(_WIN32)
 #  define glewGetProcAddress(name) wglGetProcAddress((LPCSTR)name)
 #else
-#  if defined(__APPLE__)
+#  if defined(__APPLE__) && defined(__MACH__)
 #    define glewGetProcAddress(name) NSGLGetProcAddress(name)
 #  else
 #    if defined(__sgi) || defined(__sun)
@@ -8991,7 +8991,7 @@ GLenum wglewContextInit (WGLEW_CONTEXT_ARG_DEF_LIST)
   return GLEW_OK;
 }
 
-#elif !defined(__APPLE__) || defined(GLEW_APPLE_GLX)
+#elif (!defined(__APPLE__) || !defined(__MACH__)) || defined(GLEW_APPLE_GLX)
 
 PFNGLXGETCURRENTDISPLAYPROC __glewXGetCurrentDisplay = NULL;
 
@@ -9950,7 +9950,7 @@ GLenum glxewContextInit (GLXEW_CONTEXT_ARG_DEF_LIST)
   return GLEW_OK;
 }
 
-#endif /* !__APPLE__ || GLEW_APPLE_GLX */
+#endif /* (!__APPLE__ || !__MACH__) || GLEW_APPLE_GLX */
 
 /* ------------------------------------------------------------------------ */
 
@@ -9990,7 +9990,7 @@ GLboolean glewExperimental = GL_FALSE;
 
 #if defined(_WIN32)
 extern GLenum wglewContextInit (void);
-#elif !defined(__APPLE__) || defined(GLEW_APPLE_GLX) /* _UNIX */
+#elif (!defined(__APPLE__) || !defined(__MACH__)) || defined(GLEW_APPLE_GLX) /* _UNIX */
 extern GLenum glxewContextInit (void);
 #endif /* _WIN32 */
 
@@ -10000,7 +10000,7 @@ GLenum glewInit ()
   if ( (r = glewContextInit()) ) return r;
 #if defined(_WIN32)
   return wglewContextInit();
-#elif !defined(__APPLE__) || defined(GLEW_APPLE_GLX) /* _UNIX */
+#elif (!defined(__APPLE__) || !defined(__MACH__)) || defined(GLEW_APPLE_GLX) /* _UNIX */
   return glxewContextInit();
 #else
   return r;
@@ -12994,7 +12994,7 @@ GLboolean wglewIsSupported (const char* name)
   return ret;
 }
 
-#elif !defined(__APPLE__) || defined(GLEW_APPLE_GLX)
+#elif (!defined(__APPLE__) || !defined(__MACH__)) || defined(GLEW_APPLE_GLX)
 
 #if defined(GLEW_MX)
 GLboolean glxewContextIsSupported (GLXEWContext* ctx, const char* name)

@@ -85,7 +85,7 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 
 #define PER_PIXEL_LIGHTING 1
 
-#if defined(__macosx__) || defined(__unix__)
+#if (defined (__APPLE__) && defined (__MACH__)) || defined(__unix__)
 #	pragma GCC diagnostic ignored "-Wformat-nonliteral"
 #endif
 
@@ -115,7 +115,7 @@ COPYRIGHT 1993-1999 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 //#include "console.h"
 #include "vecmat.h"
 
-#ifdef __macosx__
+#if defined (__APPLE__) && defined (__MACH__)
 # include <SDL/SDL.h>
 # include <SDL/SDL_thread.h>
 # include <SDL_net/SDL_net.h>
