@@ -6,6 +6,8 @@
  *
  */
 
+#if !defined(__APPLE__) || !defined(__MACH__)
+
 #ifdef HAVE_CONFIG_H
 #include <conf.h>
 #endif
@@ -249,3 +251,4 @@ struct ipx_driver ipx_bsd = {
 
 // ----------------------------------------------------------------------------
 
+#endif
