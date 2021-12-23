@@ -416,9 +416,9 @@ exit (0);
 
 void PrintBanner (void)
 {
-#if (defined (_WIN32) || defined (__unix__))
+#if defined (_WIN32) || defined (__unix__)
 console.printf (CON_NORMAL, "\nDESCENT 2 %s v%d.%d.%d\n", VERSION_TYPE, D2X_MAJOR, D2X_MINOR, D2X_MICRO);
-#if defined (__APPLE__) && defined (__MACH__)
+#elif defined (__APPLE__) && defined (__MACH__)
 console.printf (CON_NORMAL, "\nDESCENT 2 %s -- %s\n", VERSION_TYPE, DESCENT_VERSION);
 #endif
 if (hogFileManager.D2XFiles ().bInitialized)
