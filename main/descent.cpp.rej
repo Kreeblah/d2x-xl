@@ -1,0 +1,48 @@
+***************
+*** 38,49 ****
+  #	include "FolderDetector.h"
+  #else
+  #	ifdef _WIN32
+  #		include <WinSock.h>
+  #	endif
+  #	include "SDL_main.h"
+  #	include "SDL_keyboard.h"
+  #	include "SDL_net.h"
+  #endif
+  #include "descent.h"
+  #include "u_mem.h"
+  #include "strutil.h"
+--- 38,53 ----
+  #	include "FolderDetector.h"
+  #else
+  #	ifdef _WIN32
++ #		pragma pack(push)
++ #		pragma pack(8)
+  #		include <WinSock.h>
++ #		pragma pack(pop)
+  #	endif
+  #	include "SDL_main.h"
+  #	include "SDL_keyboard.h"
+  #	include "SDL_net.h"
+  #endif
++ 
+  #include "descent.h"
+  #include "u_mem.h"
+  #include "strutil.h"
+***************
+*** 150,155 ****
+  
+  // ----------------------------------------------------------------------------
+  
+  #if defined (__unix__) || defined (__macosx__)
+  void D2SignalHandler (int32_t nSignal)
+  #else
+--- 154,161 ----
+  
+  // ----------------------------------------------------------------------------
+  
++ extern bool bPrintingLog;
++ 
+  #if defined (__unix__) || defined (__macosx__)
+  void D2SignalHandler (int32_t nSignal)
+  #else

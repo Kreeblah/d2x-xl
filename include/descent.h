@@ -519,6 +519,7 @@ class CGameplayOptions {
 		int32_t bSkipBriefingScreens;
 		int32_t bHeadlightOnWhenPickedUp;
 		int32_t bShieldWarning;
+		int32_t bBoostOmega;
 		int32_t bInventory;
 		int32_t bIdleAnims;
 		int32_t nAIAwareness;
@@ -1650,7 +1651,7 @@ class CTerrainRenderData {
 
 class CThrusterData {
 	public:
-		CFpLightath		path;
+		CFlightPath		path;
 		float				fSpeed;
 		int16_t			nPulse;
 		time_t			tPulse;
@@ -2195,6 +2196,7 @@ class CSegDistList : public CSegDistHeader {
 			return false;
 		if (!length)
 			return true;
+		dist.SetName ("CSegDistList::dist");
 		if (!(dist.Resize (length, false)))
 			return false;
 		return (dist.Read (cf, length, 0, bCompressed) > 0);
@@ -2820,7 +2822,7 @@ class CTextureData {
 
 	public:
 		CTextureData ();
-		~CTextureData () {}
+		~CTextureData ();
 };
 
 //------------------------------------------------------------------------------
@@ -2857,7 +2859,7 @@ typedef struct tFlagData {
 	tBitmapIndex		bmi;
 	tAnimationInfo*	pAnimInfo;
 	tAnimationState	animState;
-	CFpLightath			path;
+	CFlightPath			path;
 } tFlagData;
 
 //------------------------------------------------------------------------------
@@ -4089,6 +4091,13 @@ class CGameData {
 		inline int32_t GetSpecularLight (void) { return renderData.vertColor.GetSpecularLight (); }
 		inline void SetAmbientLight (int32_t nLight) { renderData.vertColor.SetAmbientLight (nLight); }
 		inline void SetSpecularLight (int32_t nLight) { renderData.vertColor.SetSpecularLight (nLight); }
+
+		bool BoostOmega (void);
+		fix MaxOmegaBlobs (void);
+		fix MaxOmegaRange (void);
+		fix OmegaMinTrackableDot (void);
+		fix OmegaMaxTrackableRange (void);
+
 #if DBG
 
 		CObject* Object (int32_t nObject, int32_t nChecks = GAMEDATA_ERRLOG_DEFAULT, const char* pszFile = "", int32_t nLine = 0);
@@ -4717,5 +4726,3 @@ fix WI_DamageRadius (int32_t nId);
 //	-----------------------------------------------------------------------------------------------------------
 
 #endif
-
-

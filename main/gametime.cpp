@@ -255,7 +255,7 @@ class CFrameTimeFactory {
 	public:
 		static CFrameTimeFactory* GetInstance (void) {
 			if (!m_instance)
-				m_instance = new CFrameTimeFactory;
+				m_instance = NEW CFrameTimeFactory;
 			return m_instance;
 			}
 

@@ -10,7 +10,10 @@
 #endif
 
 #ifdef _WIN32
+#	pragma pack(push)
+#	pragma pack(8)
 #	include <windows.h>
+#	pragma pack(pop)
 #	include <stddef.h>
 #	include <io.h>
 #endif
@@ -85,20 +88,26 @@ return (minColor + maxColor) / 2;
 
 void CTextureManager::Init (void)
 {
+#if DBG_MALLOC
+bool b = TrackMemory (true);
+#endif
 #if 1
-m_textures.Create (1000);
+m_textures.Create (1000, "CTextureManager::m_textures");
 m_textures.SetGrowth (1000);
 #if DBG
-texIds.Create (1000);
+texIds.Create (1000, "texIds");
 texIds.SetGrowth (1000);
 #endif
 #else
-m_textures.Create (TEXTURE_LIST_SIZE);
+m_textures.Create (TEXTURE_LIST_SIZE, "CTextureManager::m_textures");
 for (int32_t i = 0; i < TEXTURE_LIST_SIZE; i++)
 	m_textures [i].SetIndex (i);
 #endif
 #if DBG
 usedHandles.Clear ();
+#endif
+#if DBG_MALLOC
+TrackMemory (b);
 #endif
 }
 
@@ -116,6 +125,9 @@ void CTextureManager::Destroy (void)
 ENTER (2, 0);
 #if DBG
 Check ();
+#endif
+#if DBG_MALLOC
+bool b = TrackMemory (true);
 #endif
 ogl.DestroyDrawBuffers ();
 cameraManager.Destroy ();
@@ -148,6 +160,9 @@ for (uint32_t i = m_textures.ToS (); i > 0; ) {
 m_textures.Reset ();
 #if DBG
 texIds.Reset ();
+#endif
+#if DBG_MALLOC
+TrackMemory (b);
 #endif
 RETURN
 }
@@ -199,14 +214,20 @@ if (i) {
 #endif
 	RETVAL (i)
 	}
+#if DBG_MALLOC
+bool b = TrackMemory (true);
+#endif
 m_textures.Push (pTexture);
 #if DBG
 int32_t l = (int32_t) strlen (pTexture->Bitmap ()->Name ()) + 1;
-char* s = new char [l];
+char* s = NEW char [l];
 if (s)
 	strcpy (s, pTexture->Bitmap ()->Name ());
 texIds.Push (s);
 s = NULL;
+#endif
+#if DBG_MALLOC
+TrackMemory (b);
 #endif
 RETVAL (m_textures.ToS ())
 }
@@ -225,6 +246,9 @@ if (!i)
 if (!i)
 	RETVAL (false)
 
+#if DBG_MALLOC
+bool b = TrackMemory (true);
+#endif
 #if DBG
 if (texIds [i - 1])
 	delete texIds [i - 1];
@@ -244,6 +268,9 @@ texIds.Shrink ();
 
 *m_textures.Top () = 0;
 m_textures.Shrink ();
+#if DBG_MALLOC
+TrackMemory (b);
+#endif
 RETVAL (true)
 }
 
@@ -934,7 +961,7 @@ GLuint CTexture::Create (int32_t w, int32_t h)
 {
 ENTER (2, 0);
 	int32_t		nSize = w * h * sizeof (uint32_t);
-	uint8_t		*data = new uint8_t [nSize];
+	uint8_t		*data = NEW uint8_t [nSize];
 
 if (!data)
 	RETVAL (0)
@@ -1350,7 +1377,7 @@ else {
 		BRP;
 #endif
 
-	m_info.frames.pBm = new CBitmap [nFrames];
+	m_info.frames.pBm = NEW CBitmap [nFrames];
 
 	int32_t	i, w = m_info.props.w;
 	CBitmap* pBmf = m_info.frames.pCurrent = m_info.frames.pBm;
@@ -1505,6 +1532,10 @@ RETVAL (0)
 bool CBitmap::SetupFrames (int32_t bMipMaps, int32_t bLoad)
 {
 ENTER (2, 0);
+#if DBG
+if (Id () == nDbgTexture)
+	BRP;
+#endif
 int32_t h = m_info.props.h;
 int32_t w = m_info.props.w;
 if (!(h * w))

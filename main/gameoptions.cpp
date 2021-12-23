@@ -416,6 +416,7 @@ if (i) {
 	bSkipBriefingScreens = 0;
 	bHeadlightOnWhenPickedUp = 1;
 	bShieldWarning = 0;
+	bBoostOmega = 0;
 	bInventory = 0;
 	bIdleAnims = 0;
 	nAIAwareness = 0;
@@ -433,6 +434,7 @@ else {
 	bSkipBriefingScreens = 0;
 	bHeadlightOnWhenPickedUp = 0;
 	bShieldWarning = 0;
+	bBoostOmega = 0;
 	bInventory = 0;
 	bIdleAnims = 0;
 	nAIAwareness = 0;

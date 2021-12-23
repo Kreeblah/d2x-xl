@@ -1,0 +1,25 @@
+***************
+*** 212,222 ****
+  	MemInit ();
+  if (!buffer)
+  	return;
+- if (UnregisterMemBlock (buffer) < 0)
+  	return;
+- buffer = reinterpret_cast<void*> (reinterpret_cast<int*> (buffer) - 1);
+  #ifndef __macosx__
+- nBytesMalloced -= *reinterpret_cast<int*> (buffer);
+  #endif
+  MemCheckIntegrity (buffer);
+  #if LONG_MEM_ID
+--- 342,352 ----
+  	MemInit ();
+  if (!buffer)
+  	return;
++ if (bTrackMemory && (UnregisterMemBlock (buffer) < 0))
+  	return;
++ buffer = reinterpret_cast<void*> (reinterpret_cast<size_t*> (buffer) - 1);
+  #ifndef __macosx__
++ nBytesMalloced -= *reinterpret_cast<size_t*> (buffer);
+  #endif
+  MemCheckIntegrity (buffer);
+  #if LONG_MEM_ID

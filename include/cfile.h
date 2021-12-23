@@ -4,10 +4,10 @@
 #include <stdio.h>
 #include <sys/types.h>
 #ifndef _WIN32
-#include <unistd.h>
+#	include <unistd.h>
 #endif
 #ifndef _WIN32_WCE
-#include <errno.h>
+#	include <errno.h>
 #endif
 
 #include "maths.h"
@@ -22,44 +22,40 @@ class CFilename {
 	public:
 		char m_buffer [FILENAME_LEN + 1];
 	public:
-		CFilename () { m_buffer [0] = '\0'; }
-		inline CFilename& operator= (CFilename& other) { 
+		CFilename () noexcept { m_buffer [0] = '\0'; }
+		inline CFilename& operator= (CFilename& other) noexcept {
 			memcpy (m_buffer, other.m_buffer, sizeof (m_buffer)); 
 			return *this;
 			}
-		inline CFilename& operator= (const char* other) { 
+		inline CFilename& operator= (const char* other) noexcept {
 			strncpy (m_buffer, other, sizeof (m_buffer)); 
 			return *this;
 			}
-		inline bool operator== (CFilename& other)
+		inline bool operator== (CFilename& other) noexcept
 			{ return !strcmp (m_buffer, other.m_buffer); }
-		inline bool operator< (CFilename& other)
+		inline bool operator< (CFilename& other) noexcept
 			{ return strcmp (m_buffer, other.m_buffer) < 0; }
-		inline bool operator> (CFilename& other)
+		inline bool operator> (CFilename& other) noexcept
 			{ return strcmp (m_buffer, other.m_buffer) > 0; }
-		inline operator const char*()
-			{ return reinterpret_cast<char*> (&m_buffer [0]); }
+		inline operator const char*() noexcept
+			{ return m_buffer; }
 	};
 
 
 typedef struct CFILE {
-	FILE		*file;
-	char		*filename;
+	FILE*	file;
+	char*	filename;
 	size_t	size;
 	size_t	libOffset;
 	size_t	rawPosition;
-	char		buffer [16384];
+	char	buffer [16384];
 	int32_t	bufLen;
-	int32_t	pBufferos;
+	int32_t	pBuffer;
 } CFILE;
 
 class CFile {
 	private:
 		CFILE	m_info;
-#ifdef _WIN32
-		inline // g++ can be such a PITA
-#endif
-		int32_t FillBuffer (void);
 
 	public:
 		CFile () { Init (); }
@@ -76,7 +72,8 @@ class CFile {
 		int32_t EoF (void);
 		int32_t Error (void);
 		size_t Write (const void *buf, int32_t elsize, int32_t nelem, int32_t bCompressed = 0);
-		inline int32_t GetC (void) { return (FillBuffer () == EOF) ? EOF : m_info.buffer [m_info.pBufferos++]; }
+		inline int32_t GetC (void) { return (FillBuffer () == EOF) ? EOF : m_info.buffer [m_info.pBuffer++]; }
+		int32_t FillBuffer (void);
 
 		size_t ReadCompressed (const void* buf, uint32_t bufLen);
 		size_t WriteCompressed (const void* buf, uint32_t bufLen);

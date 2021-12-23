@@ -234,10 +234,10 @@ int32_t CPlayerProfile::Register (void *valP, const char *pszIdent, int32_t i, i
 	CParam	*pp;
 
 l = (int32_t) strlen (MakeTag (szTag, pszIdent, i, j));
-pp = new CParam;
+pp = NEW CParam;
 if (!pp)
 	return 0;
-pp->szTag = new char [l + 1];
+pp->szTag = NEW char [l + 1];
 if (!pp->szTag)
 	return 0;
 memcpy (pp->szTag, szTag, l + 1);
@@ -552,6 +552,7 @@ for (i = 0; i < 2; i++) {
 		RP (gameOptions [i].gameplay.bInventory, i, 0);
 		RP (gameOptions [i].gameplay.bNoThief, i, 0);
 		RP (gameOptions [i].gameplay.bObserve, i, 0);
+		RP (gameOptions [i].gameplay.bBoostOmega, i, 0);
 		RP (gameOptions [i].gameplay.nShip [0], i, 0);
 		RP (gameOptions [i].gameplay.bShieldWarning, i, 0);
 		RP (gameOptions [i].gameplay.nAIAwareness, i, 0);
@@ -1132,6 +1133,7 @@ tParamValue defaultParams [] = {
 	 {"gameOptions[0].app.nVersionFilter", "3"},
 	 {"gameOptions[0].demo.bOldFormat", "0"},
 	 {"gameOptions[0].gameplay.bInventory", "1"},
+	 {"gameOptions[0].gameplay.bBoostOmega", "0" },
 	 {"gameOptions[0].gameplay.bNoThief", "0"},
 	 {"gameOptions[0].gameplay.bObserve", "0"},
 	 {"gameOptions[0].gameplay.nShip[0]", "0"},
@@ -1994,7 +1996,7 @@ strncpy (text, LOCALPLAYER.callsign,CALLSIGN_LEN);
 
 for (;;) {
 	m.Destroy ();
-	m.Create (1);
+	m.Create (1, "PilotNameMenu");
 	m.AddInput ("", text, 8);
 
 	nmAllowedChars = playername_allowed_chars;

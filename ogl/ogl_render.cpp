@@ -10,7 +10,10 @@
 #endif
 
 #ifdef _WIN32
+#	pragma pack(push)
+#	pragma pack(8)
 #	include <windows.h>
+#	pragma pack(pop)
 #	include <stddef.h>
 #	include <io.h>
 #endif
@@ -1205,7 +1208,7 @@ bool COglBuffers::SizeVertices (int32_t nVerts)
 if (int32_t (vertices.Length ()) >= nVerts)
 	return true;
 vertices.Destroy ();
-return vertices.Create (nVerts) != NULL;
+return vertices.Create (nVerts, "COglBuffers::vertices") != NULL;
 }
 
 bool COglBuffers::SizeColor (int32_t nVerts)
@@ -1213,7 +1216,7 @@ bool COglBuffers::SizeColor (int32_t nVerts)
 if (int32_t (color.Length ()) >= nVerts)
 	return true;
 color.Destroy ();
-return color.Create (nVerts) != NULL;
+return color.Create (nVerts, "COglBuffers::color") != NULL;
 }
 
 bool COglBuffers::SizeTexCoord (int32_t nVerts)
@@ -1222,7 +1225,7 @@ if ((int32_t (texCoord [0].Length ()) >= nVerts) && (int32_t (texCoord [1].Lengt
 	return true;
 texCoord [0].Destroy ();
 texCoord [1].Destroy ();
-return ((texCoord [0].Create (nVerts) != NULL) && (texCoord [1].Create (nVerts) != NULL));
+return ((texCoord [0].Create (nVerts, "COglBuffers::texCoord [0]") != NULL) && (texCoord [1].Create (nVerts, "COglBuffers::texCoord [1]") != NULL));
 }
 
 bool COglBuffers::SizeIndex (int32_t nVerts)
@@ -1230,7 +1233,7 @@ bool COglBuffers::SizeIndex (int32_t nVerts)
 if (int32_t (indices.Length ()) >= nVerts)
 	return true;
 indices.Destroy ();
-return indices.Create (nVerts) != NULL;
+return indices.Create (nVerts, "COglBuffers::indices") != NULL;
 }
 
 bool COglBuffers::SizeBuffers (int32_t nVerts)

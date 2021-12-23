@@ -88,17 +88,17 @@ if (IsMultiGame)
 omegaLightning.Create (vTargetPos, pParentObj, pTargetObj);
 vGoal = *vTargetPos - *vMuzzle;
 xGoalDist = CFixVector::Normalize (vGoal);
-if (xGoalDist < MIN_OMEGA_BLOBS * MIN_OMEGA_DIST) {
-	xOmegaBlobDist = MIN_OMEGA_DIST;
+if (xGoalDist < MIN_OMEGA_BLOBS * MIN_OMEGA_BLOB_DIST) {
+	xOmegaBlobDist = MIN_OMEGA_BLOB_DIST;
 	nOmegaBlobs = xGoalDist / xOmegaBlobDist;
 	if (nOmegaBlobs == 0)
 		nOmegaBlobs = 1;
 	}
 else {
-	xOmegaBlobDist = DESIRED_OMEGA_DIST;
+	xOmegaBlobDist = MAX_OMEGA_BLOB_DIST;
 	nOmegaBlobs = xGoalDist / xOmegaBlobDist;
-	if (nOmegaBlobs > MAX_OMEGA_BLOBS) {
-		nOmegaBlobs = MAX_OMEGA_BLOBS;
+	if (nOmegaBlobs > gameData.MaxOmegaBlobs ()) {
+		nOmegaBlobs = gameData.MaxOmegaBlobs ();
 		xOmegaBlobDist = xGoalDist / nOmegaBlobs;
 		}
 	else if (nOmegaBlobs < MIN_OMEGA_BLOBS) {
@@ -113,7 +113,7 @@ vBlobPos = *vMuzzle;
 nLastSeg = nFiringSeg;
 
 //	If nearby, don't perturb vector.  If not nearby, start halfway out.
-if (xGoalDist < MIN_OMEGA_DIST * 4) {
+if (xGoalDist < MIN_OMEGA_BLOB_DIST * 4) {
 	for (i = 0; i < nOmegaBlobs; i++)
 		xPerturbArray [i] = 0;
 	}
@@ -159,6 +159,8 @@ for (i = 0; i < nOmegaBlobs; i++) {
 		pObj->mType.physInfo.velocity *= (I2X (4));
 		pObj->SetSize (WI_BlobSize (pObj->info.nId));
 		pObj->info.xShield = FixMul (OMEGA_DAMAGE_SCALE * gameData.timeData.xFrame, WI_Strength (pObj->info.nId, gameStates.app.nDifficultyLevel));
+		if (gameData.BoostOmega ())
+			pObj->info.xShield *= 4;
 		pObj->cType.laserInfo.parent.nType = pParentObj->info.nType;
 		pObj->cType.laserInfo.parent.nSignature = pParentObj->info.nSignature;
 		pObj->cType.laserInfo.parent.nObject = OBJ_IDX (pParentObj);
@@ -288,7 +290,7 @@ else {	//	If couldn't lock on anything, fire straight ahead.
 
 	vPerturb = CFixVector::Random();
 	perturbed_fvec = bSpectate ? gameStates.app.playerPos.mOrient.m.dir.f : pParentObj->info.position.mOrient.m.dir.f + vPerturb * (I2X (1) / 16);
-	vTargetPos = *vMuzzle + perturbed_fvec * MAX_OMEGA_DIST;
+	vTargetPos = *vMuzzle + perturbed_fvec * gameData.MaxOmegaRange ();
 	CHitQuery	hitQuery (FQ_IGNORE_POWERUPS | FQ_TRANSPOINT | FQ_CHECK_OBJS, vMuzzle, &vTargetPos, nFiringSeg, OBJ_IDX (pParentObj), 0, 0, ++gameData.physicsData.bIgnoreObjFlag);
 	CHitResult	hitResult;
 	int32_t fate = FindHitpoint (hitQuery, hitResult);

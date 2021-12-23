@@ -160,21 +160,23 @@ void __cdecl D2SignalHandler (int32_t nSignal)
 {
 	static int32_t nErrors = 0;
 
-PrintCallStack ();
-if (nSignal == SIGABRT)
-	PrintLog (0, "\n+++ Abnormal program termination\n");
-else if (nSignal == SIGFPE)
-	PrintLog (0, "\n+++ Floating point error\n");
-else if (nSignal == SIGILL)
-	PrintLog (0, "\n+++ Illegal instruction\n");
-else if (nSignal == SIGINT)
-	PrintLog (0, "\n+++ Ctrl+C signal\n");
-else if (nSignal == SIGSEGV)
-	PrintLog (0, "\n+++ Memory access violation\n");
-else if (nSignal == SIGTERM)
-	PrintLog (0, "\n+++ Termination request\n");
-else
-	PrintLog (0, "\n+++ Unknown signal\n");
+if (!bPrintingLog) {
+	PrintCallStack ();
+	if (nSignal == SIGABRT)
+		PrintLog (0, "\n+++ Abnormal program termination\n");
+	else if (nSignal == SIGFPE)
+		PrintLog (0, "\n+++ Floating point error\n");
+	else if (nSignal == SIGILL)
+		PrintLog (0, "\n+++ Illegal instruction\n");
+	else if (nSignal == SIGINT)
+		PrintLog (0, "\n+++ Ctrl+C signal\n");
+	else if (nSignal == SIGSEGV)
+		PrintLog (0, "\n+++ Memory access violation\n");
+	else if (nSignal == SIGTERM)
+		PrintLog (0, "\n+++ Termination request\n");
+	else
+		PrintLog (0, "\n+++ Unknown signal\n");
+	}
 if (++nErrors > 4)
 	exit (1);
 }
@@ -997,7 +999,7 @@ if (gameConfig.nTotalTime > (20 * 60)) {	// played for more than 25 hours
 	SetScreenMode (SCREEN_MENU);
 	int32_t nFade = gameOpts->menus.nFade;
 	gameOpts->menus.nFade = 250;
-	messageBox.Show (TXT_PLEASE_DONATE);
+	messageBox.Show (TXT_PLEASE_DONATE, NULL, true, true);
 	CTimeout to (15000);
 	do {
 		messageBox.CMenu::Render (NULL, NULL);

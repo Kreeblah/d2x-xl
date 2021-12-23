@@ -216,7 +216,7 @@ class CLinuxDownload : public CDownload {
 	public:
 		static CDownload* Handler (void) {
 			if (!m_handler)
-				m_handler = new CLinuxDownload ();
+				m_handler = NEW CLinuxDownload ();
 			return m_handler;
 			}
 
@@ -299,7 +299,7 @@ class CWindowsDownload : public CDownload, public CDownloadCallback {
 	public:
 		static CDownload* Handler (void) {
 			if (!m_handler)
-				m_handler = new CWindowsDownload ();
+				m_handler = NEW CWindowsDownload ();
 			return m_handler;
 			}
 

@@ -3,8 +3,11 @@
 #define _OGL_LIB_H
 
 #ifdef _WIN32
-#include <windows.h>
-#include <stddef.h>
+#	pragma pack(push)
+#	pragma pack(8)
+#	include <windows.h>
+#	pragma pack(pop)
+#	include <stddef.h>
 #endif
 
 #include "descent.h"
@@ -199,9 +202,9 @@ class COglStates {
 		int32_t	nColorBits;
 		int32_t	nPreloadTextures;
 		uint8_t	nTransparencyLimit;
-		GLint	nDepthBits;
-		GLint	nStencilBits;
-		GLint	nStereo;
+		GLint		nDepthBits;
+		GLint		nStencilBits;
+		GLint		nStereo;
 		int32_t	bEnableTexture2D;
 		int32_t	bEnableTexClamp;
 		int32_t	bEnableScissor;
