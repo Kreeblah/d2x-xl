@@ -2,7 +2,7 @@
 #	include <windows.h>
 #	include <stddef.h>
 #	include <io.h>
-#elif !defined (__unix__)
+#elif !defined (__unix__) && (!defined(__APPLE__) || !defined(__MACH__))
 #	include <conf.h>
 #endif
 #include <string.h>
