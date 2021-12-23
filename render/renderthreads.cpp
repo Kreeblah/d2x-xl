@@ -18,6 +18,11 @@
 #include "interp.h"
 #include "lightmap.h"
 
+#if defined(__APPLE__) && defined(__MACH__)
+#include <sys/types.h>
+#include <sys/sysctl.h>
+#endif
+
 #define KILL_RENDER_THREADS	0
 #define TRANSPRENDER_THREADS	0
 
@@ -329,9 +334,9 @@ return true;
 
 #include <stdio.h>
 #include <string.h>
-#ifdef _WIN32
+#if defined(_WIN32)
 #	include <intrin.h>
-#else
+#elif defined(__x86_64__) || defined(__i386__)
 #	include <cpuid.h>
 #endif
 
@@ -346,10 +351,12 @@ typedef union {
 
 inline void CPUID (cpu_t& cpu, int infoType)
 {
-#ifdef _WIN32
+#if defined(_WIN32)
 __cpuid (cpu.v, infoType);
-#else
+#elif defined(__x86_64__) || defined(__i386__)
 __get_cpuid (infoType, &cpu.regs.eax, &cpu.regs.ebx, &cpu.regs.ecx, &cpu.regs.edx);
+#else
+exit(1);
 #endif
 }
 
@@ -357,6 +364,18 @@ __get_cpuid (infoType, &cpu.regs.eax, &cpu.regs.ebx, &cpu.regs.ecx, &cpu.regs.ed
 
 uint32_t GetCPUCores (void)
 {
+#if defined(__APPLE__) && defined(__MACH__)
+uint32_t phys_count;
+size_t phys_count_len = sizeof(phys_count);
+sysctlbyname("hw.physicalcpu", &phys_count, &phys_count_len, NULL, 0);
+uint32_t log_count;
+size_t log_count_len = sizeof(log_count);
+sysctlbyname("hw.locialcpu", &log_count, &log_count_len, NULL, 0);
+
+PrintLog(0, "\nGetCPUCores: ARM CPU.  Found %d physical and %d logical CPUs.", phys_count, log_count);
+
+return phys_count;
+#else
 	cpu_t	cpu;
 
 CPUID (cpu, 0);
@@ -394,6 +413,7 @@ PrintLog (0, "\nGetCPUCores: CPU Id = '%s'. Found %d physical and %d logical CPU
 			 vendor.s, nCores, nLogical, bHyperThreads ? "on" : "off");
 
 return nCores / (bHyperThreads + 1);
+#endif
 }
 
 //------------------------------------------------------------------------------
