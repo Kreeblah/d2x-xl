@@ -19,6 +19,10 @@
 #define lseek(a,b,c) _lseek(a,b,c)
 #endif
 
+#if defined(__APPLE__) && defined(__MACH__)
+typedef unsigned long ulong;
+#endif
+
 #if 0
 long filelength(int fd) {
 	long old_pos, size;
