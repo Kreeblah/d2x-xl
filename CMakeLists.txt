@@ -109,7 +109,7 @@ endif()
 include_directories(${PROJECT_SOURCE_DIR}/include)
 include_directories(${PROJECT_SOURCE_DIR}/input/include)
 include_directories(${PROJECT_SOURCE_DIR}/effects)
-if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+if(${CMAKE_SYSTEM_NAME} MATCHES "Linux" OR ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	include_directories(${PROJECT_SOURCE_DIR}/network/linux/include)
 endif()
 
