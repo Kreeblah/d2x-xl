@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 project(D2X-XL)
 
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_STANDARD 11)
+
 #checks
 #need to do a proper check for this
 add_definitions(-DHAVE_STRUCT_TIMESPEC)
