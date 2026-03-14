@@ -649,10 +649,10 @@ class CFloatArray : public CArray<float> {};
 template < class DATA_T, uint32_t length > 
 class CStaticArray : public CArray < DATA_T > {
 
-	template < class DATA_T, uint32_t _length > 
+	template < class, uint32_t > 
 	class CStaticArrayData {
 		public:
-			DATA_T		buffer [_length];
+			DATA_T		buffer [length];
 			};
 
 	protected:
