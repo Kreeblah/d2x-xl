@@ -27,21 +27,21 @@
 /* Define if you want a GGI build */
 #undef GGI
 
-/* Define to 1 if you have the declaration of `nanosleep', and to 0 if you
+/* Define to 1 if you have the declaration of 'nanosleep', and to 0 if you
    don't. */
 #undef HAVE_DECL_NANOSLEEP
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #undef HAVE_INTTYPES_H
 
-/* Define to 1 if you have the <memory.h> header file. */
-#undef HAVE_MEMORY_H
-
 /* Define to 1 if you have the <netipx/ipx.h> header file. */
 #undef HAVE_NETIPX_IPX_H
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdio.h> header file. */
+#undef HAVE_STDIO_H
 
 /* Define to 1 if you have the <stdlib.h> header file. */
 #undef HAVE_STDLIB_H
@@ -52,10 +52,10 @@
 /* Define to 1 if you have the <string.h> header file. */
 #undef HAVE_STRING_H
 
-/* Define to 1 if the system has the type `struct timespec'. */
+/* Define to 1 if the system has the type 'struct timespec'. */
 #undef HAVE_STRUCT_TIMESPEC
 
-/* Define to 1 if the system has the type `struct timeval'. */
+/* Define to 1 if the system has the type 'struct timeval'. */
 #undef HAVE_STRUCT_TIMEVAL
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
@@ -115,7 +115,9 @@
 /* Define for a "release" build */
 #undef RELEASE
 
-/* Define to 1 if you have the ANSI C header files. */
+/* Define to 1 if all of the C89 standard headers exist (not just the ones
+   required in a freestanding environment). This macro is provided for
+   backward compatibility; new code need not use it. */
 #undef STDC_HEADERS
 
 /* Define if you want an SVGALib build */
