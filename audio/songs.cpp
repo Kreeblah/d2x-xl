@@ -44,17 +44,17 @@ char CPlaylist::m_szDefaultPlaylist [FILENAME_LEN];
  * Some of these have different Track listings!
  * Which one is the "correct" order?
  */
-#define D2_1_DISCID         0x7d0ff809 // Descent II
-#define D2_2_DISCID         0xe010a30e // Descent II
-#define D2_3_DISCID         0xd410070d // Descent II
-#define D2_4_DISCID         0xc610080d // Descent II
-#define D2_DEF_DISCID       0x87102209 // Definitive collection Disc 2
-#define D2_OEM_DISCID       0xac0bc30d // Destination: Quartzon
-#define D2_OEM2_DISCID      0xc40c0a0d // Destination: Quartzon
-#define D2_VERTIGO_DISCID   0x53078208 // Vertigo
-#define D2_VERTIGO2_DISCID  0x64071408 // Vertigo + DMB
-#define D2_MAC_DISCID       0xb70ee40e // Macintosh
-#define D2_IPLAY_DISCID     0x22115710 // iPlay for Macintosh
+static const uint32_t D2_1_DISCID         =0x7d0ff809; // Descent II
+static const uint32_t D2_2_DISCID         =0xe010a30e; // Descent II
+static const uint32_t D2_3_DISCID         =0xd410070d; // Descent II
+static const uint32_t D2_4_DISCID         =0xc610080d; // Descent II
+static const uint32_t D2_DEF_DISCID       =0x87102209; // Definitive collection Disc 2
+static const uint32_t D2_OEM_DISCID       =0xac0bc30d; // Destination: Quartzon
+static const uint32_t D2_OEM2_DISCID      =0xc40c0a0d; // Destination: Quartzon
+static const uint32_t D2_VERTIGO_DISCID   =0x53078208; // Vertigo
+static const uint32_t D2_VERTIGO2_DISCID  =0x64071408; // Vertigo + DMB
+static const uint32_t D2_MAC_DISCID       =0xb70ee40e; // Macintosh
+static const uint32_t D2_IPLAY_DISCID     =0x22115710; // iPlay for Macintosh
 
 #define REDBOOK_TITLE_TRACK         2
 #define REDBOOK_CREDITS_TRACK       3
@@ -206,7 +206,7 @@ m_bPlaying = 0;
 #if 1
 int32_t CRedbook::HaveD2CD (void)
 {
-	int32_t discid;
+	uint32_t discid;
 
 if (!redbook.Enabled ())
 	return 0;
