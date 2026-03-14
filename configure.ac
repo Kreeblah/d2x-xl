@@ -5,8 +5,8 @@ define([D2X_MAJOR],1)
 define([D2X_MINOR],18)
 define([D2X_MICRO],74)
 
-AC_INIT(d2x-xl,[D2X_MAJOR.D2X_MINOR.D2X_MICRO],[karx11erx@hotmail.com])
-AC_PREREQ(2.52)
+AC_INIT([d2x-xl],[D2X_MAJOR.D2X_MINOR.D2X_MICRO],[karx11erx@hotmail.com])
+AC_PREREQ([2.72])
 
 AC_CANONICAL_BUILD
 AC_CANONICAL_HOST
@@ -31,7 +31,7 @@ CXXFLAGS=" $CXXFLAGS"
 
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
-AC_ISC_POSIX
+AC_SEARCH_LIBS([strerror],[cposix])
 AC_CHECK_TOOL(CC, gcc, :)
 AC_CHECK_TOOL(CXX, g++, :)
 AC_CHECK_TOOL(RANLIB, ranlib, :)
@@ -39,7 +39,15 @@ AC_CHECK_TOOL(STRIP, strip, :)
 AC_CHECK_TOOL(AR, ar, :)
 AC_PROG_CC
 AC_PROG_CXX
-AC_STDC_HEADERS
+m4_warn([obsolete],
+[The preprocessor macro 'STDC_HEADERS' is obsolete.
+  Except in unusual embedded environments, you can safely include all
+  C89 headers unconditionally.])dnl
+# Autoupdate added the next two lines to ensure that your configure
+# script's behavior did not change.  They are probably safe to remove.
+AC_CHECK_INCLUDES_DEFAULT
+AC_PROG_EGREP
+
 AC_PATH_PROGS(NASM, nasm nasmw, no)
 AC_C_BIGENDIAN
 
@@ -445,8 +453,7 @@ AC_SUBST(CFLAGS)
 
 AC_SUBST(CXXFLAGS)
 
-AC_OUTPUT(
-    Makefile
+AC_CONFIG_FILES([Makefile
     2d/Makefile
     3d/Makefile
     ai/Makefile
@@ -471,7 +478,8 @@ AC_OUTPUT(
     physics/Makefile
     render/Makefile
     weapons/Makefile
-)
+])
+AC_OUTPUT
 
 AC_MSG_RESULT([
         d2x has been configured successfully.
