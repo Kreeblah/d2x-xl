@@ -119,7 +119,7 @@ class CArray : public CQuickSort < DATA_T > {
 			m_data.pos = 0;
 			m_data.nMode = 0;
 			m_data.bWrap = false;
-			memset (&m_data.none, 0, uint32_t (sizeof(m_data.none)));
+			memset (static_cast<void*>(&m_data.none), 0, uint32_t (sizeof(m_data.none)));
 			}
 
 		// ----------------------------------------
@@ -136,7 +136,7 @@ class CArray : public CQuickSort < DATA_T > {
 				}
 #endif
 			if (m_data.buffer) 
-				memset (m_data.buffer, filler, sizeof (DATA_T) * ((count < m_data.length) ? count : m_data.length)); 
+				memset (static_cast<void*>(m_data.buffer), filler, sizeof (DATA_T) * ((count < m_data.length) ? count : m_data.length)); 
 			}
 
 		// ----------------------------------------
@@ -302,7 +302,7 @@ class CArray : public CQuickSort < DATA_T > {
 				RegisterMemBlock (p, length * sizeof (DATA_T), m_data.szName, 0);
 #endif
 			if (bCopy) {
-				memcpy (p, m_data.buffer, ((length > m_data.length) ? m_data.length : length) * sizeof (DATA_T)); 
+				memcpy (static_cast<void*>(p), m_data.buffer, ((length > m_data.length) ? m_data.length : length) * sizeof (DATA_T)); 
 				Clear (); // hack to avoid d'tors
 				}
 			m_data.length = length;
@@ -375,7 +375,7 @@ class CArray : public CQuickSort < DATA_T > {
 			if (!m_data.buffer) 
 				return m_data.none;
 #endif
-			memcpy (m_data.buffer, source, m_data.length * sizeof (DATA_T)); 
+			memcpy (static_cast<void*>(m_data.buffer), source, m_data.length * sizeof (DATA_T)); 
 			return m_data.buffer [0];
 			}
 
