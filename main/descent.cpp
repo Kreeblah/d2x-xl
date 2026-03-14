@@ -44,7 +44,11 @@ char copyright[] = "DESCENT II  COPYRIGHT (C) 1994-1996 PARALLAX SOFTWARE CORPOR
 #	include "SDL_net.h"
 #endif
 #if defined (__APPLE__) && defined (__MACH__)
-#	include "FolderDetector.h"
+# if defined (USE_MAC_FRAMEWORKS)
+#	 include "FolderDetector.h"
+# else
+#  include "io/macosx/FolderDetector.h"
+# endif
 #endif
 #include "descent.h"
 #include "u_mem.h"
@@ -151,6 +155,8 @@ uint32_t descent_critical_deverror = 0;
 uint32_t descent_critical_errcode = 0;
 
 // ----------------------------------------------------------------------------
+
+extern bool bPrintingLog;
 
 #if defined (__unix__) || (defined (__APPLE__) && defined (__MACH__))
 void D2SignalHandler (int32_t nSignal)
