@@ -30,7 +30,11 @@ COPYRIGHT 1993-1998 PARALLAX SOFTWARE CORPORATION.  ALL RIGHTS RESERVED.
 #include "cfile.h"
 #include "u_mem.h"
 #if defined (__APPLE__) && defined (__MACH__)
-#	include "MacErrorMsg.h"
+# if defined (USE_MAC_FRAMEWORKS)
+#	 include "MacErrorMsg.h"
+# else
+#  include "io/macosx/MacErrorMsg.h"
+# endif
 #endif
 
 #define MAX_MSG_LEN 1024
