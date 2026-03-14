@@ -22,7 +22,11 @@
 #	include "SDL_keyboard.h"
 #endif
 #if defined (__APPLE__) && defined (__MACH__)
-#	include "FolderDetector.h"
+# if defined (USE_MAC_FRAMEWORKS)
+#	 include "FolderDetector.h"
+# else
+#  include "io/macosx/FolderDetector.h"
+# endif
 #endif
 #include "descent.h"
 #include "findfile.h"
